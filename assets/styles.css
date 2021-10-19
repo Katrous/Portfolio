@@ -1,8 +1,8 @@
-
 * { 
     margin: 0; 
     padding: 0; 
     box-sizing: border-box;
+	font-size: 62.5%;
 
     /* Variables */
     --brown:#775A47;
@@ -44,7 +44,7 @@ header {
     width: 100%;
     padding: 0.5 2rem;
     z-index: 20;
-    background-color: var(--light-grey);
+    background-color: #ededed;
    
 }
 
@@ -72,7 +72,7 @@ header {
 }
 
 .navList {
-    font-size: 1.7rem;
+    font-size: 2.9rem;
     font-weight: 600;
     position: relative;
     top: 50%;
@@ -92,25 +92,32 @@ header {
 
 /* HERO */
 .header-main {
-    width: 100%;
+    width: 95%;
+    margin: 0 auto;
     height: 90vh;
     background-image: url("./images/hero3.jpeg");
     background-position: center center;
     background-size:cover;
     background-repeat: no-repeat;
-
     clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 30% 100%, 0% 100%);
     z-index: 1;
-
+    
     justify-content: center;
     align-items: center;
 }
 
+.contactButton {
+    font-size: 3rem;
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    border: none;
+}
 
  .headings {
-     font-size: 2.5rem;
+     font-size: 6.5rem;
      color:#fff;
      text-align: center;
+     margin: 2rem 0;
  }
 
 
@@ -121,11 +128,6 @@ header {
     
  }
 
-/* .grey-container {
-    background-color: var(--light-grey);
-   
-    
-} */
 
  .sectionTitle h2 {
     color: #775A47;
@@ -144,12 +146,12 @@ header {
     width: 100%;
     grid-template-columns:  auto auto ;
     grid-template-rows:  auto auto  auto;
-    column-gap: 2rem;
+    column-gap: 3rem;
     row-gap: 2rem;
-    padding: 0 2.5rem;
+    padding: 0 7.5rem;
 }
 
- .project-iframe {
+ .project-img {
     position:absolute; 
     top:0px; 
     left:0px; 
@@ -158,14 +160,15 @@ header {
     border: none; 
     overflow: hidden;
     border-radius: 2rem;
+    transition: all .4s;
  }
 
  .project {
     width:100%; 
     padding-bottom:56.25%; 
     position:relative;
-     
  }
+
 .project-span {
         position:absolute; 
         width:100%;
@@ -175,29 +178,38 @@ header {
         z-index: 1;
         /* fixes overlap error in IE7/8, 
            make sure you have an empty gif */
-        opacity: .45;
-        border-radius: 2rem;
+        border-radius: 2rem;      
+        transition: all .4s;
 }
 
+.brown:hover {
+    background-size: 100%;
+    backdrop-filter: blur(5px);
+}
 
 .brown {
-     background-color: var(--brown);
-     border-radius: 2rem;
-
+     background-image: linear-gradient(90deg, transparent 0%, transparent 50%, var(--brown) 50%);
+     background-size: 200%;
  }
 
 .grey {
-     background-color: var(--grey);
-     border-radius: 2rem;
+    background-image: linear-gradient(90deg, transparent 0%, transparent 50%, var(--grey) 50%);
+    background-size: 200%;
 
  }
+
+ .grey:hover {
+    background-size: 100%;
+    backdrop-filter: blur(5px);
+  
+}
  
   .contactContainer {
       text-align: center;
       color: #988274;
       max-width: 28%;
       margin: 4rem auto;
-      font-size: 1.5rem;
+      font-size: 4rem;
       padding: 3em 3rem;
       font-weight: 600;
       border-radius: 2rem;
@@ -230,32 +242,4 @@ header {
       width: 100%;
       resize: none;
   }
-/* 
-  @media only screen and (max-width: 1900px) {
 
-    .desktop {
-        display: none;
-    }
-
-    .tablet {
-        display: block;
-    }
-    .photoGrid {
-        width: 100%;
-    }
-   
-    div[class^="col-"] {
-       max-width: 50%;
-       float: left;
-       margin: 0;
-       padding: 2em;
-     }
-   
-     div[class^="col-"] img {
-       width: 100%;
-     }
-     
-     
-  } */
-
-  

@@ -1,17 +1,54 @@
-<?php
-    include_once("includes/header.php");
-    include_once("includes/classes/User.php");
-    include_once("includes/classes/Post.php");
+<?php 
+include("includes/header.php");
 
-    if(isset($_POST['post'])) {
-        $post = new Post($con, $userLoggedIn);
-        $post->submitPost($_POST['post_text'], 'none');
-        header("Location: index.php");
-    }
+if(isset($_POST['post'])){
 
+	$uploadOk = 1;
+	$imageName = $_FILES['image']['name'];
+	$errorMessage = "";
+
+	if($imageName != "") {
+		$targetDir = "assets/images/posts/";
+		$imageName = $targetDir . uniqid() . basename($imageName);
+		$imageFileType = pathinfo($imageName, PATHINFO_EXTENSION);
+
+		if($_FILES['image']['size'] > 10000000) {
+			$errorMessage = "Sorry your file is too large";
+			$uploadOk = 0;
+		}
+
+		if(strtolower($imageFileType) != "jpeg" && strtolower($imageFileType) != "png" && strtolower($imageFileType) != "jpg") {
+			$errorMessage = "Sorry, only jpeg, jpg and png files are allowed";
+			$uploadOk = 0;
+		}
+
+		if($uploadOk) {
+			
+			if(move_uploaded_file($_FILES['image']['tmp_name'], $imageName)) {
+				//image uploaded okay
+			}
+			else {
+				//image did not upload
+				$uploadOk = 0;
+			}
+		}
+
+	}
+
+	if($uploadOk) {
+		$post = new Post($con, $userLoggedIn);
+		$post->submitPost($_POST['post_text'], 'none', $imageName);
+	}
+	else {
+		echo "<div style='text-align:center;' class='alert alert-danger'>
+				$errorMessage
+			</div>";
+	}
+
+}
     // session_destroy();
 ?>
-   <div class="user_details column">
+   <!-- <div class="user_details column">
        <a href="<?php echo $userLoggedIn?>"> <img src=".<?php echo $user['profile_pic']; ?>" alt="img test"></a>
        <div class="user_details_left_right">
         <a href="<?php echo $userLoggedIn?>">
@@ -25,12 +62,16 @@
         echo "Likes" . $user['num_likes'];
         ?>
        </div>
-   </div>
+   </div> -->
 
    <div class="main_column column">
-        <form action="index.php" method="POST" class="post_form">
+        <form action="index.php" method="POST" class="post_form" enctype="multipart/form-data">
+        <a href="<?php echo $userLoggedIn?>"> <img src="./<?php echo $user['profile_pic']; ?>" alt="img test" class='post_form_pic'></a>
             <textarea name="post_text" id="post_text" placeholder="Got something to say?"></textarea>
             <input type="submit" name="post" id="post_button" value="Post">
+            <label class="btn btn-primary">
+                <i class="fa fa-image iconPosition"> Upload a Photo </i> <input type="file" style="display: none;"  name="image">
+            </label>
         </form>
 
         
@@ -38,6 +79,7 @@
         <div class="posts_area">
 
         </div>
+        
         <img id="loading" src="assets/images/icons/loading.gif" alt="">
    </div>
 
