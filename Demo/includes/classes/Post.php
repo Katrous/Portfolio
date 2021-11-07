@@ -8,13 +8,26 @@ class Post {
 		$this->user_obj = new User($con, $user);
 	}
 
-	public function submitPost($body, $user_to) {
+	public function submitPost($body, $user_to, $imageName) {
 		$body = strip_tags($body); //removes html tags 
 		$body = mysqli_real_escape_string($this->con, $body);
 		$check_empty = preg_replace('/\s+/', '', $body); //Deltes all spaces 
       
 		if($check_empty != "") {
 
+			$body_array = preg_split("/\s+/", $body);
+
+			foreach($body_array as $key => $value) {
+				if(strpos($value, "www.youtube.com/watch?v=") !== false) {
+					$link = preg_split("!&!", $value);
+					$value = preg_replace("!watch\?v=!", "embed/", $link[0]);
+					$value = "<br><iframe width=\'420\' height=\'315\' src=\'" . $value . "\'></iframe><br>";
+
+					$body_array[$key] = $value;
+				}
+			}
+
+			$body = implode(" ", $body_array);
 
 			//Current date and time
 			$date_added = date("Y-m-d H:i:s");
@@ -26,7 +39,7 @@ class Post {
 				$user_to = "none";
 
 			//insert post 
-			$query = mysqli_query($this->con, "INSERT INTO posts VALUES(NULL, '$body', '$added_by', '$user_to', '$date_added', 'no', 'no', '0')");
+			$query = mysqli_query($this->con, "INSERT INTO posts VALUES(NULL, '$body', '$added_by', '$user_to', '$date_added', 'no', 'no', '0', '$imageName')");
 			$returned_id = mysqli_insert_id($this->con);
 
 			//Insert notification
@@ -69,6 +82,7 @@ class Post {
 				$body = $row['body'];
 				$added_by = $row['added_by'];
 				$date_time = $row['date_added'];
+				$imagePath = $row['image'];
 
 				//Prepare user_to string so it can be included even if not posted to a user
 				if($row['user_to'] == "none") {
@@ -206,18 +220,38 @@ class Post {
 						}
 					}
 
+					if($imagePath != "") {
+						$imageDiv = "<div class='postedImage'>
+							<img src='$imagePath' alt='test'>
+						</div>";
+					} else {
+						$imageDiv = "";
+					}
+
 					$str .= "<div class='status_post' onClick='javascript:toggle$id()'>
-								<div class='post_profile_pic'>
-									<img src='./$profile_pic' width='50'>
+								<div class='post-header'>
+
+							
+									<div class='post_profile_pic'>
+										<img src='./$profile_pic' width='50'>
+									</div>
+
+									<div class='posted_by' style='color:#ACACAC;'>
+										<a href='$added_by'> $first_name $last_name </a> 
+										<span> $user_to </span>
+									</div>
+								
+
+									<div class='right-side-header'>
+										$time_message
+										$delete_button
+									</div>
 								</div>
 
-								<div class='posted_by' style='color:#ACACAC;'>
-									<a href='$added_by'> $first_name $last_name </a> $user_to &nbsp;&nbsp;&nbsp;&nbsp;$time_message
-									$delete_button
-								</div>
 								<div id='post_body'>
 									$body
 									<br>
+									$imageDiv
 									<br>
 									<br>
 								</div>
@@ -231,7 +265,7 @@ class Post {
 							<div class='post_comment' id='toggleComment$id' style='display:none'>
 								<iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0'> </iframe>
 							</div>
-							<hr>";
+								<hr>";
 
 				}
 
@@ -314,7 +348,7 @@ class Post {
 					}
 
 					if($userLoggedIn == $added_by)
-						$delete_button = "<button class='delete_button btn-danger' id='post$id'>X</button>";
+						$delete_button = "<button class='delete_button' id='post$id'>X</button>";
 					else 
 						$delete_button = "";
 
@@ -372,10 +406,10 @@ class Post {
 
 
 						if($interval->m == 1) {
-							$time_message = $interval->m . " month". $days;
+							$time_message = $interval->m . " month, ". $days;
 						}
 						else {
-							$time_message = $interval->m . " months". $days;
+							$time_message = $interval->m . " months, ". $days;
 						}
 
 					}
@@ -413,17 +447,25 @@ class Post {
 					}
 
 					$str .= "<div class='status_post' onClick='javascript:toggle$id()'>
-								<div class='post_profile_pic'>
-								<img src='./$profile_pic' width='50'>
-								</div>
+								<div class='post-header'>
+									<div class='post_profile_pic'>
+									<img src='./$profile_pic' width='50'>
+									</div>
 
-								<div class='posted_by' style='color:#ACACAC;'>
-									<a href='$added_by'> $first_name $last_name </a> &nbsp;&nbsp;&nbsp;&nbsp;$time_message
+									<div class='posted_by' style='color:#ACACAC;'>
+										<a href='$added_by'> $first_name $last_name </a> 
+									</div>
+
+									<div class='right-side-header'>
+									$time_message
 									$delete_button
+									</div>
 								</div>
+								
 								<div id='post_body'>
 									$body
 									<br>
+									
 									<br>
 									<br>
 								</div>
@@ -438,6 +480,10 @@ class Post {
 								<iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0'></iframe>
 							</div>
 							<hr>";
+
+
+							
+// Image in post_body not working yet, implement later
 
 				?>
 				<script>
@@ -613,14 +659,21 @@ class Post {
 				}
 
 				$str .= "<div class='status_post' onClick='javascript:toggle$id()'>
-							<div class='post_profile_pic'>
+							<div class='post-header'>
+								<div class='post_profile_pic'>
 								<img src='./$profile_pic' width='50'>
-							</div>
+								</div>
 
-							<div class='posted_by' style='color:#ACACAC;'>
-								<a href='$added_by'> $first_name $last_name </a> $user_to &nbsp;&nbsp;&nbsp;&nbsp;$time_message
-								$delete_button
-							</div>
+								<div class='posted_by' style='color:#ACACAC;'>
+										<a href='$added_by'> $first_name $last_name </a> 
+									</div>
+
+									<div class='right-side-header'>
+									$time_message
+									$delete_button
+									</div>
+								</div>
+
 							<div id='post_body'>
 								$body
 								<br>
@@ -633,11 +686,11 @@ class Post {
 								<iframe src='like.php?post_id=$id' scrolling='no'> </iframe> 
 							</div>
 
-						</div>
-						<div class='post_comment' id='toggleComment$id' style='display:none'>
-							<iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0'> </iframe>
-						</div>
-						<hr>";
+							</div>
+							<div class='post_comment' id='toggleComment$id' style='display:none;'>
+								<iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0'></iframe>
+							</div>
+							<hr>";
 
 		
 
@@ -674,6 +727,8 @@ class Post {
 
 		echo $str;
 	}
+
+
 
 
 

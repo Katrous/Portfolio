@@ -47,8 +47,11 @@ class Message {
 			$user_to = $row['user_to'];
 			$user_from = $row['user_from'];
 			$body = $row['body'];
+			$id = $row['id'];
 
+			
 			$div_top = ($user_to == $userLoggedIn) ? "<div class='message' id='green'>" : "<div class='message' id='blue'>";
+
 			$data = $data . $div_top . $body . "</div><br><br>";
 		}
 		return $data;
@@ -67,7 +70,7 @@ class Message {
 		$start_date = new DateTime($row['date']); //Time of post
 		$end_date = new DateTime($date_time_now); //Current time
 		$interval = $start_date->diff($end_date); //Difference between dates 
-		if($interval->y >= 1) {
+		if($interval-> y >= 1) {
 			if($interval == 1)
 				$time_message = $interval->y . " year ago"; //1 year ago
 			else 
@@ -157,7 +160,7 @@ class Message {
 			$split = $split[0] . $dots; 
 
 			$return_string .= "<a href='messages.php?u=$username'> <div class='user_found_messages'>
-								<img src='" . $user_found_obj->getProfilePic() . "' style='border-radius: 5px; margin-right: 5px;'>
+								<img src='./" . $user_found_obj->getProfilePic() . "' style='border-radius: 5px; margin-right: 5px;'>
 								" . $user_found_obj->getFirstAndLastName() . "
 								<span class='timestamp_smaller' id='grey'> " . $latest_message_details[2] . "</span>
 								<p id='grey' style='margin: 0;'>" . $latest_message_details[0] . $split . " </p>
@@ -209,7 +212,7 @@ class Message {
 
 			$is_unread_query = mysqli_query($this->con, "SELECT opened FROM messages WHERE user_to='$userLoggedIn' AND user_from='$username' ORDER BY id DESC");
 			$row = mysqli_fetch_array($is_unread_query);
-			$style = ($row['opened'] == 'no') ? "background-color: #DDEDFF;" : "";
+			$style = ($row['opened'] == 'no') ? "background-color: var(--lavender);" : "";
 
 
 			$user_found_obj = new User($this->con, $username);
@@ -221,7 +224,7 @@ class Message {
 
 			$return_string .= "<a href='messages.php?u=$username'> 
 								<div class='user_found_messages' style='" . $style . "'>
-								<img src='" . $user_found_obj->getProfilePic() . "' style='border-radius: 5px; margin-right: 5px;'>
+								<img src='./" . $user_found_obj->getProfilePic() . "' style='border-radius: 5px; margin-right: 5px;'>
 								" . $user_found_obj->getFirstAndLastName() . "
 								<span class='timestamp_smaller' id='grey'> " . $latest_message_details[2] . "</span>
 								<p id='grey' style='margin: 0;'>" . $latest_message_details[0] . $split . " </p>

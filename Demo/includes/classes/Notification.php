@@ -119,7 +119,7 @@ class Notification {
 			}
 
 			$opened = $row['opened'];
-			$style = ($opened == 'no') ? "background-color: #DDEDFF;" : "";
+			$style = ($opened == 'no') ? "background-color: var(--lavender);" : "";
 
 			$return_string .= "<a href='" . $row['link'] . "'> 
 									<div class='resultDisplay resultDisplayNotification' style='" . $style . "'>
