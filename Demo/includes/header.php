@@ -42,7 +42,7 @@ if (isset($_SESSION['username'])) {
 
 </head>
 <body>
-
+	
 <div class="top_bar">
     <div class="logo">
         <a href="index.php">Swirlfeed</a>

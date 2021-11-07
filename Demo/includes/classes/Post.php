@@ -406,10 +406,10 @@ class Post {
 
 
 						if($interval->m == 1) {
-							$time_message = $interval->m . " month". $days;
+							$time_message = $interval->m . " month, ". $days;
 						}
 						else {
-							$time_message = $interval->m . " months". $days;
+							$time_message = $interval->m . " months, ". $days;
 						}
 
 					}
@@ -659,14 +659,21 @@ class Post {
 				}
 
 				$str .= "<div class='status_post' onClick='javascript:toggle$id()'>
-							<div class='post_profile_pic'>
+							<div class='post-header'>
+								<div class='post_profile_pic'>
 								<img src='./$profile_pic' width='50'>
-							</div>
+								</div>
 
-							<div class='posted_by' style='color:#ACACAC;'>
-								<a href='$added_by'> $first_name $last_name </a> $user_to &nbsp;&nbsp;&nbsp;&nbsp;$time_message
-								$delete_button
-							</div>
+								<div class='posted_by' style='color:#ACACAC;'>
+										<a href='$added_by'> $first_name $last_name </a> 
+									</div>
+
+									<div class='right-side-header'>
+									$time_message
+									$delete_button
+									</div>
+								</div>
+
 							<div id='post_body'>
 								$body
 								<br>
@@ -679,11 +686,11 @@ class Post {
 								<iframe src='like.php?post_id=$id' scrolling='no'> </iframe> 
 							</div>
 
-						</div>
-						<div class='post_comment' id='toggleComment$id' style='display:none'>
-							<iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0'> </iframe>
-						</div>
-						<hr>";
+							</div>
+							<div class='post_comment' id='toggleComment$id' style='display:none;'>
+								<iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0'></iframe>
+							</div>
+							<hr>";
 
 		
 

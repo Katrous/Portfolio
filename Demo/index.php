@@ -37,7 +37,20 @@ if(isset($_POST['post'])){
 
 	if($uploadOk) {
 		$post = new Post($con, $userLoggedIn);
-		$post->submitPost($_POST['post_text'], 'none', $imageName);
+       
+
+        // Upload if post body has content
+        if($_POST['post_text'] != '') {
+            $post->submitPost($_POST['post_text'], 'none', $imageName);
+        } else {
+            // Upload if post body has no content
+            echo "<div style='text-align:center;' class='alert alert-danger'>
+           You cannot post without a text body at this time. Sorry!
+        </div>";
+
+        }
+
+      
 	}
 	else {
 		echo "<div style='text-align:center;' class='alert alert-danger'>
@@ -48,7 +61,7 @@ if(isset($_POST['post'])){
 }
     // session_destroy();
 ?>
-   <!-- <div class="user_details column">
+   <!-- <div class="user_details">
        <a href="<?php echo $userLoggedIn?>"> <img src=".<?php echo $user['profile_pic']; ?>" alt="img test"></a>
        <div class="user_details_left_right">
         <a href="<?php echo $userLoggedIn?>">
@@ -64,7 +77,7 @@ if(isset($_POST['post'])){
        </div>
    </div> -->
 
-   <div class="main_column column">
+   <div class="main_column">
         <form action="index.php" method="POST" class="post_form" enctype="multipart/form-data">
         <a href="<?php echo $userLoggedIn?>"> <img src="./<?php echo $user['profile_pic']; ?>" alt="img test" class='post_form_pic'></a>
             <textarea name="post_text" id="post_text" placeholder="Got something to say?"></textarea>
@@ -82,6 +95,8 @@ if(isset($_POST['post'])){
         
         <img id="loading" src="assets/images/icons/loading.gif" alt="">
    </div>
+
+
 
    <script>
 $(function(){
@@ -147,3 +162,6 @@ $(function(){
    </div>
 </body>
 </html>
+
+
+
