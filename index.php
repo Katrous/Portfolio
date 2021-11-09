@@ -1,6 +1,7 @@
 <?php
 
 // server side validation
+    $error = "";
     $phpError = "";
     $successMessage = "";
 if($_POST) {
@@ -24,7 +25,7 @@ if($_POST) {
     } else {
         $emailTo = "richardslaura24@gmail.com";
         $subject = "Portfolio Email";
-        $content = $_POST['email-body'] . "<br> From: " . $_POST['name'] ;
+        $content = $_POST['email-body'] . "From: " . $_POST['name'] ;
         $headers = "FROM: ". $_POST['email'];
         
         if(mail($emailTo, $subject, $content, $headers)) {
@@ -34,47 +35,7 @@ if($_POST) {
         }
     }
 }
-// $errors = [];
-// $errorMessage = '';
 
-// if (!empty($_POST)) {
-//     $name = $_POST['name'];
-//     $email = $_POST['email'];
-//     $message = $_POST['message'];
-
-//     if (empty($name)) {
-//         $errors[] = 'Name is empty';
-//     }
-
-//     if (empty($email)) {
-//         $errors[] = 'Email is empty';
-//     } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-//         $errors[] = 'Email is invalid';
-//     }
-
-//     if (empty($message)) {
-//         $errors[] = 'Message is empty';
-//     }
-
-
-//     if (empty($errors)) {
-//         $toEmail = 'richardslaura24@gmail.com';
-//         $emailSubject = 'New email from your contant form';
-//         $headers = ['From' => $email, 'Reply-To' => $email, 'Content-type' => 'text/html; charset=iso-8859-1'];
-
-//         $bodyParagraphs = ["Name: {$name}", "Email: {$email}", "Message:", $message];
-//         $body = join(PHP_EOL, $bodyParagraphs);
-
-//         if (mail($toEmail, $emailSubject, $body, $headers)) {
-//             header('Location: thank-you.html');
-//         } else {
-//             $errorMessage = 'Oops, something went wrong. Please try again later';
-//         }
-//     } else {
-//         $allErrors = join('<br/>', $errors);
-//         $errorMessage = "<p style='color: red;'>{$allErrors}</p>";
-//     }
-// }
 
 ?>
 
@@ -83,15 +44,15 @@ if($_POST) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elegant Web Development</title>
+    <title>Web Dev: Laura</title>
     <link rel="stylesheet" href="assets/styles.css">
-    <link rel="icon" href="assets/images/favicon.ico" type="image/icon type">
+    <link rel="icon" href="assets\images\LargeLrLogoSvg.svg" type="image/icon type">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@700&display=swap" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@700&display=swap" rel="stylesheet"> 
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
@@ -99,28 +60,35 @@ if($_POST) {
     <header class="header">
         <div class="container flex container header-container">
             <div class="navbrand">
-                <a href="index.php"><img src="assets/images/favicon.ico" alt=""></a>
+                <a href="index.php"><img src="assets\images\LrLogoSvg.svg" alt=""></a>
             </div>
             <nav class="nav">
-                <ul class="navList flex"> 
-                    <li class="navItem active"><a href="index.php">Home </a></li>
-                    <li class="navItem"><a href="#about">About Me </a></li>
-                    <li class="navItem"><a href="#projects">Projects </a></li>
-                    <li class="navItem"> <a href='#contact'> Contract Me </a></li>
+                <ul class="navList flex nav-menu"> 
+                    <li class="navItem nav-item"><a class='navA active' href="index.php">Home </a></li>
+                    <li class="navItem nav-item"><a class='navA active' href="#about">About Me </a></li>
+                    <li class="navItem nav-item"><a class='navA active' href="#projects">Projects </a></li>
+                    <li class="navItem nav-item"> <a class='navA active' href='#contact'> Contact Me </a></li>
                 </ul>
+
+                <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
             </nav>
           
         </div>
     </header>
 
-
         <div class="header-main flex">
             <div class="headings">
                 <h1>Hi, I'm Laura</h1>
-                <h3>Junior Web Developer</h3> 
-                <button class="contactButton">
-                    Contact Me
-                </button>    
+                <h3>A Web Developer</h3> 
+                <a href="#contact">
+                    <button class="contactButton">
+                        Contact Me
+                    </button>    
+                </a>
             </div>
         </div>
     
@@ -132,8 +100,8 @@ if($_POST) {
 
         <section id='about' class="container about-me">
             <h2 class="sectionTitle-text">About Me</h2>
-            <h3 class='d3Graph-header'>Experience In Languages/Technologies I Know</h3>
-           <div id="d3-container">
+            <div id="d3-container">
+               <h3 class='d3Graph-header'>Experience In Languages/Technologies I Know</h3>
 
            </div>
 
@@ -172,6 +140,7 @@ if($_POST) {
            </div>
            </section>
 
+           
            
         <section class="projectContainer container grey-container"  id='projects'>
             <div class="container sectionTitle">
@@ -249,33 +218,101 @@ if($_POST) {
                         <img src="assets/images/natours-thumbnail.PNG" id='project-frame' class='project-img' onmouseover="this.className='blur';" onmouseout="this.className='';">
                     </a>
                 </div>
-
-                
-             
-                <!-- <div class="project grey"> <img src="assets/images/project-3.PNG" alt=""></div>
-                <div class="project brown"><img src="assets/images/project-4.png" alt=""></div>
-                <div class="project brown"><img src="assets/images/project-5.png" alt=""></div>
-                <div class="project grey"><img src="assets/images/project-6.png" alt=""></div> -->
-
             </div>
 
-           
-
-            <!-- <div class="photoGrid tablet">
+            <div class="grid photoGrid tablet">
                 <div class="row">
-                    <div class="col-1"> <img src="assets/images/project-1.PNG" alt=""></div>
-                    <div class="col-2"> <img src="assets/images/project-2.PNG" alt=""></div>
+                    <div class="project-tablet"> 
+                        <div class="img-container-tablet">
+                        <a href="Demo/index.php">
+                                <img src="assets/images/swirlfeed-thumbnail.PNG" id='project-frame' class='project-img-tablet'>
+                            </a>
+                        </div>
+                        <div class="project-text">
+                            <p>A fully responsive, animated site using advanced css technics. All animations were done in pure css. Layout was created using the modern practice 
+                            of mixing CSS Grid and CSS Flexbox together. Grid for layout and flexbox for alignments.
+                            </p>
+                        </div>
+                    </div>  
                 </div>
-                <div class="row">
-                    <div class="col-3"> <img src="assets/images/project-3.PNG" alt=""></div>
-                    <div class="col-1"><img src="assets/images/project-4.png" alt=""></div>
-                </div>
-                <div class="row">
-                    <div class="col-2"><img src="assets/images/project-5.png" alt=""></div>
-                    <div class="col-3"><img src="assets/images/project-6.png" alt=""></div>
-                </div> -->
-
                
+                <div class="row">
+                    <div class="project-tablet"> 
+                        <div class="img-container-tablet">
+                        <a href="Blog Project/index.html">
+                                <img src="assets/images/nodeBlog-thumbnail.PNG" id='project-frame' class='project-img-tablet'>
+                            </a>
+                        </div>
+                        <div class="project-text">
+                            <p>A fully responsive, animated site using advanced css technics. All animations were done in pure css. Layout was created using the modern practice 
+                            of mixing CSS Grid and CSS Flexbox together. Grid for layout and flexbox for alignments.
+                            </p>
+                        </div>
+                    </div>  
+                </div>
+
+                <div class="row">
+                    <div class="project-tablet"> 
+                        <div class="img-container-tablet">
+                        <a href="hotel-del-luna/index.html">
+                                <img src="assets/images/hotel-del-luna-thumbnail.PNG" id='project-frame' class='project-img-tablet'>
+                            </a>
+                        </div>
+                        <div class="project-text">
+                            <p>A fully responsive, animated site using advanced css technics. All animations were done in pure css. Layout was created using the modern practice 
+                            of mixing CSS Grid and CSS Flexbox together. Grid for layout and flexbox for alignments.
+                            </p>
+                        </div>
+                    </div>  
+                </div>
+
+                <div class="row">
+                    <div class="project-tablet"> 
+                        <div class="img-container-tablet">
+                        <a href="DrinkingGame/index1.html">
+                                <img src="assets/images/drinkingGame-thumbnail.PNG" id='project-frame' class='project-img-tablet'>
+                            </a>
+                        </div>
+                        <div class="project-text">
+                            <p>A fully responsive, animated site using advanced css technics. All animations were done in pure css. Layout was created using the modern practice 
+                            of mixing CSS Grid and CSS Flexbox together. Grid for layout and flexbox for alignments.
+                            </p>
+                        </div>
+                    </div>  
+                </div>
+
+                <div class="row">
+                    <div class="project-tablet"> 
+                        <div class="img-container-tablet">
+                            <a href="starter/index.html">
+                                <img src="assets/images/natours-thumbnail.PNG" id='project-frame' class='project-img-tablet'>
+                            </a>
+                        </div>
+                        <div class="project-text">
+                            <p>A fully responsive, animated site using advanced css technics. All animations were done in pure css. Layout was created using the modern practice 
+                            of mixing CSS Grid and CSS Flexbox together. Grid for layout and flexbox for alignments.
+                            </p>
+                        </div>
+                    </div>  
+                </div>
+
+                <div class="row">
+                    <div class="project-tablet"> 
+                        <div class="img-container-tablet">
+                            <a href="">
+                                <img src="assets/images/nodeBlog-thumbnail.PNG" id='project-frame' class='project-img-tablet'>
+                            </a>
+                        </div>
+                        <div class="project-text">
+                            <p>A fully responsive, animated site using advanced css technics. All animations were done in pure css. Layout was created using the modern practice 
+                            of mixing CSS Grid and CSS Flexbox together. Grid for layout and flexbox for alignments.
+                            </p>
+                        </div>
+                    </div>  
+                </div>
+           
+            </div>
+
        
         </section>
 
@@ -304,7 +341,9 @@ if($_POST) {
     </main>
 
      <script src="assets/js/index.js"></script>
+      <script src="assets/js/app.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    
     <script>
         $("form").submit(function(e){
             var error = "";
