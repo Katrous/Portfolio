@@ -3,7 +3,7 @@ $(document).ready(function() {
 	$('#search_text_input').focus(function (){
 		if(window.matchMedia( "(min-width: 800px)" ).matches){
 			// only execute if window size is above 800px;
-			$(".search").animate({width: '100%'}, 400);
+			$(".search_from-container").animate({width: '100%'}, 400);
 		}
 	});
 	

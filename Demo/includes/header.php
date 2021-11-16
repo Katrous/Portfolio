@@ -49,7 +49,7 @@ if (isset($_SESSION['username'])) {
     </div>
 
 	<div class="search">
-		<form action="search.php" method="GET" name='search_form'>
+		<form action="search.php" method="GET" name='search_form' class='search_from-container'>
 		<input type="text" onkeyup='getLiveSearchUsers(this.value, "<?php echo $userLoggedIn; ?>")' name='q' placeholder='Search...' autocomplete='off' id='search_text_input'>
 		<div class="button_holder">
 		<i class="fas fa-search"></i>

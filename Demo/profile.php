@@ -46,7 +46,7 @@
 ?>
    
   <div class="profile_top-container">
-    <div class="main_column profile-top">
+    <div class="profile-top">
       <div class="profile-details">
         <img class='profile-page-pic' src="<?php echo './' . $user_array['profile_pic']; ?>" alt="">
         <p> <?php echo $user_array['first_name'] . " " . $user_array['last_name'];?></p>
@@ -85,11 +85,7 @@
       <input type="submit" class="input-profile-button" data-toggle="modal" data-target="#post_form" value="Post Something">
    
       <?php
-      if($userLoggedIn != $username) {
-        echo '<div class="profile_info_bottom">';
-        echo $logged_in_user_obj->getMutualFriends($username) . " Mutual Friends";
-        echo '</div>';
-      }
+    
       ?>
       </div>
   
