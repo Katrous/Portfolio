@@ -50,7 +50,7 @@ require 'includes/form_handlers/login_handler.php';
                 <input type="password" name="log_password" placeholder="Password">
                 <br>
                 <?php 
-                    if(in_array("Email or password was incorrect<br>", $error_array)) echo "Email or password was incorrect<br>";
+                    if(in_array("Email or password was incorrect<br>", $error_array)) echo "<p class='errorText'> Email or password was incorrect</p>";
                 ?>
                 <input type="submit" name="login_button" value="Login">
                 <br>
@@ -70,7 +70,7 @@ require 'includes/form_handlers/login_handler.php';
                     ?>" required>
                     <br>
                     <?php 
-                        if(in_array("Your first name must be between 2 and 25 characters<br>", $error_array)) echo "Your first name must be between 2 and 25 characters<br>";
+                        if(in_array("Your first name must be between 2 and 25 characters<br>", $error_array)) echo "<p class='errorText'>Your first name must be between 2 and 25 characters</p>";
                     ?>
                     <input type="text" name="reg_lname" placeholder="Last Name"   value="<?php 
                         if(isset($_SESSION['reg_lname'])) {
@@ -79,7 +79,7 @@ require 'includes/form_handlers/login_handler.php';
                     ?>" required>
                     <br>
                     <?php
-                    if(in_array("Your last name must be between 2 and 25 characters<br>", $error_array)) echo "Your last name must be between 2 and 25 characters<br>";
+                    if(in_array("Your last name must be between 2 and 25 characters<br>", $error_array)) echo "<p class='errorText'>Your last name must be between 2 and 25 characters</p>";
                     ?>
                     <input type="email" name="reg_email" placeholder="example@gmail.com"  value="<?php 
                         if(isset($_SESSION['reg_email'])) {
@@ -94,23 +94,23 @@ require 'includes/form_handlers/login_handler.php';
                     ?>" required>
                     <br>
                     <?php
-                        if(in_array("Email already in use<br>", $error_array)) echo "Email already in use<br>";
-                        elseif(in_array("Invalid Email format<br>", $error_array)) echo "Invalid Email format<br>";
-                        elseif(in_array("emails dont match<br>", $error_array)) echo "emails dont match<br>";
+                        if(in_array("Email already in use<br>", $error_array)) echo "<p class='errorText'>Email already in use</p>";
+                        elseif(in_array("Invalid Email format<br>", $error_array)) echo "<p class='errorText'>Invalid Email format</p>";
+                        elseif(in_array("emails dont match<br>", $error_array)) echo "<p class='errorText'> emails dont match</p>";
                     ?>
                     <input type="password" name="reg_password" placeholder="Password" required>
                     <br>
                     <input type="password" name="reg_password2" placeholder="Confirm Password"required>
                     <br>
                     <?php
-                        if(in_array("Your passwords do not match<br>", $error_array)) echo "Your passwords do not match<br>";
-                        elseif(in_array("Your password can only contain english characters or numbers<br>", $error_array)) echo "Your password can only contain english characters or numbers<br>";
-                        elseif(in_array("Your password must be between 5 and 30 characters<br>", $error_array)) echo "Your password must be between 5 and 30 characters<br>";
+                        if(in_array("Your passwords do not match<br>", $error_array)) echo "<p class='errorText'>Your passwords do not match</p>";
+                        elseif(in_array("Your password can only contain english characters or numbers<br>", $error_array)) echo "<p class='errorText'>Your password can only contain english characters or numbers</p>";
+                        elseif(in_array("Your password must be between 5 and 30 characters<br>", $error_array)) echo "<p class='errorText'>Your password must be between 5 and 30 characters</p>";
                     ?>
                     <input type="submit" name="register_button" value="Register">
                     <br>
                     <?php
-                    if(in_array("<span style='color: #14C800;'> You're all set! Go ahead and login! </spam> <br>", $error_array)) echo "<span style='color: #14C800;'> You're all set! Go ahead and login! </spam> <br>";
+                      if(in_array("<span style='color: #14C800;'> You're all set! Go ahead and login! </spam> <br>", $error_array)) echo "<span class='span-signup'> You're all set! Go ahead and login! </spam> <br>";
                     ?>
                     <a href="#" id="signin" class="signin">Already have an account? Sign in here!</a>
                 </form>
