@@ -319,6 +319,11 @@ header {
       font-weight: bold;
   }
 
+  .contactContainer h1 {
+      font-weight: bold;
+      font-size: 3rem;
+  }
+
   .contactContainer input[type=text], .contactContainer input[type=email]  {
       width: 100%;
       
@@ -338,10 +343,16 @@ header {
 
   .contactContainer input[type=submit]{
       padding: 0.5em 3em;
-      background-color: #fff;
+      background-color: #988274;
       border: 1px solid #988274;
+      color: #fff;
       
   } 
+
+  .contactContainer input[type=submit]:hover{
+    box-shadow:-1px 10px 9px -8px rgba(64,64,64,0.64);
+    transform: scale(1.05);
+} 
 
   input:focus {
       outline: none;
@@ -437,6 +448,18 @@ ul li {
     margin: 0 auto;
 }
 
+.links-about {
+    margin-top: 3rem;
+}
+
+
+.links-about a {
+    color: var(--brown);
+    text-decoration: none;
+    margin: 0 1rem;
+    font-size: 7rem;
+}
+
 
 /* MEDIA QUERY */
 @media only screen and (max-width: 1200px) {
@@ -482,9 +505,9 @@ ul li {
     }
 
     .nav-menu.active {
-        /* top: 0; */
+        top: 0;
         right: 0;
-        /* margin-top: 14rem; */
+        margin-top: 19rem;
     }
 
     .nav-item {
@@ -678,6 +701,11 @@ ul li {
     font-size: 2rem;
     }
 
+    .contactContainer input[type=submit]:hover{
+        transform: none;
+        box-shadow: NONE;
+    } 
+
     }
 
     @media screen and (max-width: 900px), (pointer: coarse) {
@@ -724,6 +752,17 @@ ul li {
           font-size: 3rem;
       }
 
+      .d3Graph-header {
+          margin-top: 3rem;
+    }
+
+    .row {margin: 3rem auto;
+     }
+
+     .contactContainer input[type=submit]{
+        padding: 1rem 6rem;
+    } 
+
     }
 
     @media screen and ( max-height: 455px ) { 
@@ -731,4 +770,6 @@ ul li {
     margin-top: 4rem;
     height: min-content;
     }
+
+
      }

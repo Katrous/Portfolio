@@ -70,6 +70,7 @@ if($_POST) {
                     <li class="navItem nav-item"><a class='navA active' href="#about">About Me </a></li>
                     <li class="navItem nav-item"><a class='navA active' href="#projects">Projects </a></li>
                     <li class="navItem nav-item"> <a class='navA active' href='#contact'> Contact Me </a></li>
+                    <li class="navItem nav-item"> <a class='navA active'href="resume.pdf"> Resume </a></li>
                 </ul>
 
                 <div class="hamburger">
@@ -145,6 +146,12 @@ if($_POST) {
                    <!-- <p>Langauges I speak: CSS3, HTML5, Javascript, PHP, Node.js</p>
                    <p>Developer Tools: Github, Terminal, Bootstrap, Jquery, Express</p> -->
                </div>
+
+               <div class="links links-about">
+                   <a href="https://github.com/Katrous?tab=repositories"><i class="fab fa-github-square"></i></a>
+                   <a href="https://www.linkedin.com/in/laura-richards-4562aa226/"><i class="fab fa-linkedin"></i></a>
+               </div>
+          
 
            </div>
            </section>
@@ -226,6 +233,19 @@ if($_POST) {
                            </div>
                         </div>
                         <img src="assets/images/natours-thumbnail.PNG" id='project-frame' class='project-img' onmouseover="this.className='blur';" onmouseout="this.className='';">
+                    </a>
+                </div>
+
+                <div class="project" class="project-img">
+                    <a href="https://web.brickin-it.screencraft.net.au/">
+                        <div class='project-span grey'>
+                           <div class="project-span-text">
+                            <h3>Brickin-It</h3>
+                            <p>A fully responsive, functional blog built for a client. The project was done by me and 3 other developers with my role being the primary/lead backend developer and a core front end developer. </p>
+                            <p>Langauges Used: HTML5, CSS3, Foundation, Wordpress, PHP</p>
+                           </div>
+                        </div>
+                        <img src="assets/images/brickin-it-thumbnail.PNG" id='project-frame' class='project-img' onmouseover="this.className='blur';" onmouseout="this.className='';">
                     </a>
                 </div>
             </div>
@@ -310,6 +330,22 @@ if($_POST) {
                         </div>
                     </div>  
                 </div>
+
+                <div class="row">
+                    <div class="project-tablet"> 
+                        <div class="img-container-tablet">
+                            <a href="https://web.brickin-it.screencraft.net.au/">
+                                <img src="assets/images/brickin-it-thumbnail.PNG"  id='project-frame' class='project-img-tablet'>
+                            </a>
+                        </div>
+                        <div class="project-text">
+                        <h3>Brickin-It</h3>
+                        <p>A fully responsive, functional blog built for a client. The project was done by me and 3 other developers with my role being the primary/lead backend developer and a core front end developer. </p>
+                            <p>Langauges Used: HTML5, CSS3, Foundation, Wordpress, PHP</p>
+                        </div>
+                    </div>  
+                </div>
+
 
                 
            

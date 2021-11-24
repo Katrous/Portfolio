@@ -31,6 +31,12 @@ body {
 	background-color: #F6F6F6;
 	font-size: var(--mediums);
 }
+
+.noMorePostsp {
+	font-size: 1.5rem;
+	margin-top: 1rem;
+	font-style: italic;
+}
 a {
 	color: #20AAE5;
 	text-decoration: none;
@@ -39,6 +45,8 @@ a {
 img {
 	max-width: 90%;
 }
+
+
 .top_bar {
 	height:  4rem;
 	padding: 0 2rem;
@@ -796,21 +804,22 @@ input[type="file"] {
 	border: 1px solid #000;
 	border-radius: 5px;
 	padding: 5px 10px;
-	display: inline-block;
+	display: block;
 	color: #fff;
+	max-width: 90%;
 }
 
 .message#blue {
 	background-color: #3498db;
 	border-color: #2980b9;
-	float: right;
 	margin-bottom: 5px;
+	align-self: flex-end;
 }
 
 .message#green {
 	background-color: #2ecc71;
 	border-color: #27ae60;
-	float: left;
+	align-self: flex-start;
 	margin-bottom: 5px;
 }
 
@@ -820,6 +829,8 @@ input[type="file"] {
 	width: 95%;
 	margin: 0 auto;
 	margin-bottom: 10px;
+	display: flex;
+	flex-direction: column;
 }
 
 .user_found_messages {
@@ -1273,6 +1284,11 @@ input[type="file"] {
 		width: fit-content;
 		font-size: 1.5rem;
 
+	}
+
+	.message {
+		font-size: 1.1rem;
+		overflow-y: hidden;
 	}
 
   }
